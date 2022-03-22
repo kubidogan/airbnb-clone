@@ -10,7 +10,8 @@ class App extends Component {
     super(props);
     this.state = {
       flats: [],
-      selectedFlat: null
+      selectedFlat: null,
+      search: ""
     };
   }
 
@@ -40,13 +41,18 @@ class App extends Component {
     if (this.state.selectedFlat) {
       center = {
         lat: this.state.selectedFlat.lat,
-        lng: this.state.selectedFlat.lng,
+        lng: this.state.selectedFlat.lng
       }
     }
     return (
       <div className="app">
         <div className="main">
           <div className="search">
+            <input
+            type="text"
+            placeholder="Search..."
+            value={this.state.search}
+            onChange={this.handleSearch} />
           </div>
           <div className="flats">
             {this.state.flats.map((flat) => {
@@ -59,11 +65,15 @@ class App extends Component {
         </div>
         <div className="map">
         <GoogleMapReact
-        bootstrapURLKeys={{ key: "" }}
         center={center}
-        zoom={9}>
+        zoom={11}>
           {this.state.flats.map((flat) => {
-              return <Marker key-={flat.name} lat={flat.lat} lng={flat.lng} text={flat.price}/>
+              return <Marker
+              key-={flat.name}
+              lat={flat.lat}
+              lng={flat.lng}
+              text={flat.price}
+              selected={flat === this.state.selectedFlat} />
             })}
         </GoogleMapReact>
         </div>
