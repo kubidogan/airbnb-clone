@@ -7,7 +7,7 @@ class Flat extends React.Component {
   }
   render() {
     const title = this.props.flat.price + this.props.flat.priceCurrency
-    + " - " + this.props.flat.title
+    + " - " + this.props.flat.name
 
     const style = {
       backgroundImage: `url('${this.props.flat.imageUrl}')`
